@@ -11,30 +11,27 @@ const BubblePage = () => {
   // fetch your colors data from the server when the component mounts
   // set that data to the colorList state property
   useEffect(() => {
-    console.log('inside useEffect')
-    const token = window.localStorage.getItem('token');
+    getData();
+  });
 
-    const getData = () => {
-      axiosWithAuth()
-      .get('/api/colors')
-      .then(res => {
-        console.log('below is data in BubblePage axios api call:')
-        console.log(res)
-      })
-      .catch(err => {
-        console.log('something went wrong in call in bubblpg')
-        console.log(err);
-      })
-    }
-  })
+  const getData = () => {
+    axiosWithAuth()
+    .get('/api/colors')
+    .then(res => {
+      console.log(res.data)
+    })
+    .catch(err => {
+      console.log('something went wrong while fetching data')
+    })
+}
 
 
 
 
   return (
     <>
-      <ColorList colors={colorList} updateColors={setColorList} />
-      <Bubbles colors={colorList} />
+    <ColorList colors={colorList} updateColors={setColorList} />
+    <Bubbles colors={colorList} />
     </>
   );
 };
