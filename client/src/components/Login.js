@@ -1,23 +1,36 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
-const Login = () => {
+
+
+const Login = (props) => {
 
   const [credentials, setCredentials] = useState({
-    credentials: {
-      username: '',
-      password: ''
-    }
+    username: '',
+    password: ''
   });
 
+
+  const login = e => {
+    e.preventDefault();
+    axios.post('http://localhost:5000/api/login', credentials)
+    .then(req => {
+      console.log('data received from submit / login to server:')
+      console.log(req)
+      window.localStorage.setItem("token", req.data.payload)
+      props.history.push('/bubble')
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
 
 
 
   const handleChange = e => {
     setCredentials({
-      credentials: {
-        ...credentials,
-        [e.target.name]: e.target.value
-      }
+      ...credentials,
+      [e.target.name]: e.target.value
     })
   }
 
@@ -26,8 +39,8 @@ const Login = () => {
   return (
     <>
       <h1>Welcome to the Bubble App!</h1>
-      <p>Sign In</p>
-      <form >
+      <p>Sign In!</p>
+      <form onSubmit={login}>
         <input
         type="text"
         name="username"
@@ -41,6 +54,8 @@ const Login = () => {
         onChange={handleChange}
         value={credentials.password}
         />
+        <button>Log In</button>
+        
       </form>
     </>
   );
