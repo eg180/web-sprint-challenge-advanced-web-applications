@@ -19,6 +19,7 @@ const BubblePage = () => {
     .get('/api/colors')
     .then(res => {
       console.log(res.data)
+      setColorList(res.data)
     })
     .catch(err => {
       console.log('something went wrong while fetching data')
