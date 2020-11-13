@@ -18,9 +18,11 @@ const BubblePage = () => {
       axiosWithAuth()
       .get('/api/colors')
       .then(res => {
+        console.log('below is data in BubblePage axios api call:')
         console.log(res)
       })
       .catch(err => {
+        console.log('something went wrong in call in bubblpg')
         console.log(err);
       })
     }
