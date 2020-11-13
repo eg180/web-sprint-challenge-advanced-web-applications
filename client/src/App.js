@@ -4,13 +4,15 @@ import BubblePage from './components/BubblePage';
 import Login from "./components/Login";
 import "./styles.scss";
 
+import PrivateRoute from './components/PrivateRoute';
+
 function App() {
   return (
     <Router>
       <div className="App">
       <Switch>
         <Route exact path="/" component={Login} />
-        <Route path="/bubble" component={BubblePage} />
+        <PrivateRoute path="/bubble" component={BubblePage} />
       </Switch>
       </div>
     </Router>

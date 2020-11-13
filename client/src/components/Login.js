@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 
 
@@ -13,7 +13,8 @@ const Login = (props) => {
 
   const login = e => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/login', credentials)
+    axiosWithAuth()
+    .post('/api/login', credentials)
     .then(req => {
       console.log('data received from submit / login to server:')
       console.log(req)
